@@ -1,3 +1,6 @@
+mod game;
+use game::Game;
+
 #[derive(Debug)]
 
 struct Player {
@@ -5,17 +8,6 @@ struct Player {
     marker: char
 }
 
-struct Game {
-    grid: [[Option<char>; 3]; 3],
-}
-
-impl Game {
-    fn new() -> Self {
-        Game {
-            grid: [[None; 3]; 3],
-        }
-    }
-}
 fn main() {
 
     let players = [
