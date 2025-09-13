@@ -1,18 +1,15 @@
 mod game;
 use game::Game;
 
-#[derive(Debug)]
+mod player;
 
-struct Player {
-    name: String,
-    marker: char
-}
+use player::Player;
 
 fn main() {
 
     let players = [
-        Player {name: String::from("Player 1"), marker: 'X'},
-        Player {name: String::from("Player 2"), marker: 'O'}
+        Player::new(String::from("Player 1"), 'X'),
+        Player::new(String::from("Player 2"), 'O'),
     ];
 
     let game = Game::new();
