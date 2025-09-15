@@ -9,11 +9,6 @@ use player::Player;
 
 fn main() {
 
-    // let players = [
-    //     Player::new(String::from("Player 1"), 'X'),
-    //     Player::new(String::from("Player 2"), 'O'),
-    // ];
-
     // let mut game = Game::new();
 
     // println!("{:#?}", players);
@@ -29,7 +24,11 @@ fn main() {
 
     let player_2_name: String = player_name(2);
 
-    
+
+    let players = [
+        Player::new(player_1_name, 'X'),
+        Player::new(player_2_name, 'O'),
+    ];
 
 }
 
