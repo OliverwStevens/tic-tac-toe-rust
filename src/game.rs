@@ -1,5 +1,7 @@
 use std::fmt;
 
+use crate::Player;
+
 type Result<T> = std::result::Result<T, CellError>;
 
 #[derive(Debug, Clone, Copy)]  // Added Copy for cheap cloning of errors
@@ -11,15 +13,17 @@ impl fmt::Display for CellError {
     }
 }
 
-#[derive(Debug, Clone)]
+// #[derive(Debug, Clone)]
 pub struct Game {
     pub grid: [[Option<char>; 3]; 3],
+    pub players: [Player; 2],
 }
 
 impl Game {
-    pub fn new() -> Self {
+    pub fn new(players: [Player; 2]) -> Self {
         Game {
             grid: [[None; 3]; 3],
+            players: players
         }
     }
 

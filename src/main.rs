@@ -9,8 +9,6 @@ use player::Player;
 
 fn main() {
 
-    // let mut game = Game::new();
-
     // println!("{:#?}", players);
     // println!("{:#?}", game.grid);
 
@@ -29,6 +27,9 @@ fn main() {
         Player::new(player_1_name, 'X'),
         Player::new(player_2_name, 'O'),
     ];
+
+    let mut game = Game::new(players);
+
 
 }
 
