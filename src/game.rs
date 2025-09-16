@@ -17,16 +17,22 @@ impl fmt::Display for CellError {
 pub struct Game {
     pub grid: [[Option<char>; 3]; 3],
     pub players: [Player; 2],
+    turn_index: usize
 }
 
 impl Game {
+    
     pub fn new(players: [Player; 2]) -> Self {
         Game {
             grid: [[None; 3]; 3],
-            players: players
+            players,
+            turn_index: 0
         }
     }
 
+    pub fn current_player(&self) -> &Player {
+        &self.players[self.turn_index % self.players.len()]
+    }
     pub fn handle_marker(&self, row: usize, col: usize) -> Result<char> {
         if row >= 3 || col >= 3 {
             return Err(CellError);

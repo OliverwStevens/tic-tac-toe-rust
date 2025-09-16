@@ -30,6 +30,8 @@ fn main() {
 
     let mut game = Game::new(players);
 
+    println!("{}", game.current_player().name)
+
 
 }
 
