@@ -33,6 +33,30 @@ impl Game {
     pub fn current_player(&self) -> &Player {
         &self.players[self.turn_index % self.players.len()]
     }
+
+
+    pub fn print_grid(&self) {
+        for (i, row) in self.grid.iter().enumerate() {
+            let mut row_str = String::new();
+            for (j, cell) in row.iter().enumerate() {
+                row_str.push(self.cell_character(cell));
+                if j < row.len() - 1 {
+                    row_str.push_str(" | ");
+                }
+            }
+            println!("{}", row_str);
+            if i < self.grid.len() - 1 {
+                println!("---------");
+            }
+        }
+    }
+
+    fn cell_character(&self, cell: &Option<char>) -> char {
+        match cell {
+            Some(c) => *c,
+            None => ' ',
+        }
+    }
     pub fn handle_marker(&self, row: usize, col: usize) -> Result<char> {
         if row >= 3 || col >= 3 {
             return Err(CellError);
@@ -50,7 +74,7 @@ impl Game {
         }
     }
 
-    pub fn place_marker(&mut self, row: usize, col: usize, mark: char) -> Result<()> {  // Fixed: Removed , CellError
+    pub fn place_marker(&mut self, row: usize, col: usize, mark: char) -> Result<()> {
         match self.handle_marker(row, col) {
             Ok(_) => {
                 self.grid[row][col] = Some(mark);
@@ -58,7 +82,7 @@ impl Game {
                 Ok(())
             }
             Err(e) => {
-                self.print_marker(Err(e));  // No .clone() needed with Copy
+                self.print_marker(Err(e));
                 Err(e)
             }
         }
