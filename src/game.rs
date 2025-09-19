@@ -87,4 +87,12 @@ impl Game {
             }
         }
     }
+
+    pub fn over(&self) -> bool {
+        self.grid.iter().all(|row| {
+            row.iter().all(|cell| {
+                matches!(cell, Some(_))
+            })
+        })
+    }
 }

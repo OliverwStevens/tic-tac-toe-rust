@@ -30,7 +30,9 @@ fn main() {
 
     let mut game = Game::new(players);
 
-    game.print_grid()
+    // while game is not over: take turn
+    game.print_grid();
+
 
 
 }
