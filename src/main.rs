@@ -7,6 +7,8 @@ mod player;
 
 use player::Player;
 
+#[cfg(test)]
+mod tests;
 fn main() {
 
     // println!("{:#?}", players);
