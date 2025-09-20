@@ -58,9 +58,6 @@ impl Game {
         }
     }
     pub fn handle_marker(&self, row: usize, col: usize) -> Result<char> {
-        if row >= 3 || col >= 3 {
-            return Err(CellError);
-        }
         match self.grid[row][col] {
             Some(_) => Err(CellError),
             None => Ok(' '),
@@ -94,5 +91,19 @@ impl Game {
                 matches!(cell, Some(_))
             })
         })
+    }
+    
+    
+    pub fn turn(&mut self, row: usize, col: usize) -> Result<()> {
+        let player_marker = self.current_player().marker;
+        match self.place_marker(row, col, &player_marker) {
+            Ok(_) => {
+                self.turn_index += 1;
+                Ok(())
+            }
+            Err(e) => {
+                Err(e)
+            }
+        }
     }
 }

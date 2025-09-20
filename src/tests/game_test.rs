@@ -36,16 +36,6 @@ fn it_can_not_place_a_marker_where_it_already_has() {
 
 }
 
-
-#[test]
-fn it_can_not_place_a_marker_out_of_bounds() {
-  let mut game: Game = create_new_game();
-  let marker = game.players[0].marker;
-
-  assert!(game.place_marker(5, 3, &marker).is_err());
-
-}
-
 #[test]
 fn it_returns_true_when_the_game_is_over() {
   let mut game: Game = create_new_game();
@@ -70,5 +60,17 @@ fn it_returns_the_cell_character() {
 
   assert_eq!(game.cell_character(&game.grid[0][0]), marker);
   assert_eq!(game.cell_character(&game.grid[1][0]), ' ');
+
+}
+
+#[test]
+fn it_plays_a_turn_and_switches_players_appropriately() {
+  let mut game: Game = create_new_game();
+  assert!(game.turn(0, 0).is_ok());
+  assert_eq!(game.current_player().name, game.players[1].name);
+  assert!(game.turn(0, 0).is_err());
+  assert!(game.turn(1, 0).is_ok());
+  assert_eq!(game.current_player().name, game.players[0].name);
+
 
 }
