@@ -1,8 +1,8 @@
 #[derive(Debug)]
 
 pub struct Player {
-  name: String,
-  marker: char
+  pub name: String,
+  pub marker: char
 }
 
 impl Player {
@@ -11,13 +11,5 @@ impl Player {
       name: name,
       marker: marker
     }
-  }
-
-  pub fn name(&self) -> &String {
-    &self.name
-  }
-
-  pub fn marker(&self) -> &char {
-    &self.marker
   }
 }

@@ -33,6 +33,8 @@ fn main() {
     let mut game = Game::new(players);
 
     // while game is not over: take turn
+    // let mark = game.players[0].marker;
+    // game.place_marker(0, 2, &mark);
     game.print_grid();
 
 

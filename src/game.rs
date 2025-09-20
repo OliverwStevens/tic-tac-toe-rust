@@ -51,7 +51,7 @@ impl Game {
         }
     }
 
-    fn cell_character(&self, cell: &Option<char>) -> char {
+    pub fn cell_character(&self, cell: &Option<char>) -> char {
         match cell {
             Some(c) => *c,
             None => ' ',
@@ -74,11 +74,11 @@ impl Game {
         }
     }
 
-    pub fn place_marker(&mut self, row: usize, col: usize, mark: char) -> Result<()> {
+    pub fn place_marker(&mut self, row: usize, col: usize, mark: &char) -> Result<()> {
         match self.handle_marker(row, col) {
             Ok(_) => {
-                self.grid[row][col] = Some(mark);
-                self.print_marker(Ok(mark));
+                self.grid[row][col] = Some(*mark);
+                self.print_marker(Ok(*mark));
                 Ok(())
             }
             Err(e) => {
