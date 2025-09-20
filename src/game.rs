@@ -2,7 +2,6 @@ use std::fmt;
 
 use crate::Player;
 
-type Result<T> = std::result::Result<T, CellError>;
 
 #[derive(Debug, Clone, Copy)]  // Added Copy for cheap cloning of errors
 pub struct CellError;
@@ -57,32 +56,9 @@ impl Game {
             None => ' ',
         }
     }
-    pub fn handle_marker(&self, row: usize, col: usize) -> Result<char> {
-        match self.grid[row][col] {
-            Some(_) => Err(CellError),
-            None => Ok(' '),
-        }
-    }
-
-    pub fn print_marker(&self, result: Result<char>) {
-        match result {
-            Ok(marker) => println!("Marker is {}", marker),
-            Err(e) => println!("Error: {}", e),
-        }
-    }
-
-    pub fn place_marker(&mut self, row: usize, col: usize, mark: &char) -> Result<()> {
-        match self.handle_marker(row, col) {
-            Ok(_) => {
-                self.grid[row][col] = Some(*mark);
-                self.print_marker(Ok(*mark));
-                Ok(())
-            }
-            Err(e) => {
-                self.print_marker(Err(e));
-                Err(e)
-            }
-        }
+    
+    pub fn place_marker(&mut self, row: usize, col: usize, mark: &char) {
+        self.grid[row][col] = Some(*mark);
     }
 
     pub fn over(&self) -> bool {
@@ -94,16 +70,9 @@ impl Game {
     }
     
     
-    pub fn turn(&mut self, row: usize, col: usize) -> Result<()> {
+    pub fn turn(&mut self, row: usize, col: usize) {
         let player_marker = self.current_player().marker;
-        match self.place_marker(row, col, &player_marker) {
-            Ok(_) => {
-                self.turn_index += 1;
-                Ok(())
-            }
-            Err(e) => {
-                Err(e)
-            }
-        }
+        self.place_marker(row, col, &player_marker);
+        self.turn_index += 1;
     }
 }

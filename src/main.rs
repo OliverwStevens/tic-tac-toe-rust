@@ -31,7 +31,7 @@ fn main() {
   let mut game = Game::new(players);
   
   game.print_grid();
-  
+
   while !game.over() {
     take_turn(&mut game);
   }
@@ -50,9 +50,10 @@ fn player_name(player_index: u8) -> String {
 fn take_turn(game: &mut Game) {
   println!("{}'s Turn:", game.current_player().name);
   
-  match get_turn_input() {
+  match get_turn_input(&game) {
     Ok(value) => {
-      play_turn(game, value.0, value.1);
+      game.turn(value.0, value.1);
+      game.print_grid();
 
     }
     Err(e) => {
@@ -60,17 +61,7 @@ fn take_turn(game: &mut Game) {
     }
   }
 }
-fn play_turn(game: &mut Game, row: usize, col: usize) {
-  match game.turn(row, col) {
-    Ok(_) => {
-      game.print_grid();
-    }
-    Err(e) => {
-      println!("{}", e)
-    }
-  }
-}
-fn get_turn_input() -> Result<(usize, usize), io::Error> {
+fn get_turn_input(game: &Game) -> Result<(usize, usize), io::Error> {
   let mut input = String::new();
   io::stdin().read_line(&mut input)?;
   
@@ -114,6 +105,13 @@ fn get_turn_input() -> Result<(usize, usize), io::Error> {
     return Err(io::Error::new(
       io::ErrorKind::InvalidInput,
       format!("Row and column must be 0-2, got row={} col={}", row, col),
+    ));
+  }
+
+  if game.grid[row][col].is_some() {
+    return Err(io::Error::new(
+      io::ErrorKind::InvalidInput,
+      format!("Cell already occupied")
     ));
   }
   
