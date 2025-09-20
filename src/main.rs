@@ -40,7 +40,7 @@ fn player_name(player_index: u8) -> String {
 }
 
 fn take_turn(game: &mut Game) {
-  println!("{}'s Turn:", game.current_player().name);
+  println!("{}'s Turn:", game.current_player().name.trim());
   
   match get_turn_input(&game) {
     Ok(value) => {
