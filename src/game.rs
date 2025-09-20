@@ -1,16 +1,4 @@
-use std::fmt;
-
 use crate::Player;
-
-
-#[derive(Debug, Clone, Copy)]  // Added Copy for cheap cloning of errors
-pub struct CellError;
-
-impl fmt::Display for CellError {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "Cell is invalid or out of bounds")
-    }
-}
 
 // #[derive(Debug, Clone)]
 pub struct Game {

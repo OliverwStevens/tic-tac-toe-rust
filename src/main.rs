@@ -10,12 +10,6 @@ use player::Player;
 #[cfg(test)]
 mod tests;
 fn main() {
-  // println!("{:#?}", players);
-  // println!("{:#?}", game.grid);
-  
-  // game.place_marker(0, 0, 'x');
-  // game.place_marker(0, 0, 'x');
-  // game.place_marker(0, 2, 'o');
   
   println!("Welcome to Rust Tic Tac Toe!");
   
